@@ -18,8 +18,17 @@ module.exports = (sequelize, DataTypes) => {
             tableName: 'estoque',
             timestamps: false,
             underscored: true,
-        }
+        })
 
-    )
+        Estoque.associate = function(models) {
+            Estoque.belongsToMany(models.Produto, {
+                as: "Produto",
+                through: "produto_has_estoque",
+                foreignKey: "estoque_id_estoque",
+                otherKey: "produto_id_produto",
+                timestamps: false,
+            })
+        }
+        
     return Estoque;
 }

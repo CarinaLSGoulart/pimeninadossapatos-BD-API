@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
                 autoIncrement: true,
             },
             codigoSku: DataTypes.INTEGER,
+            genero: DataTypes.STRING,
             descricao: DataTypes.STRING,
             preco: DataTypes.INTEGER,
             cor: DataTypes.STRING,
@@ -20,8 +21,13 @@ module.exports = (sequelize, DataTypes) => {
             tableName: 'produto',
             timestamps: false,
             underscored: true,
-        }
+        })
 
-    )
+    Produto.associate = function (models) {
+        Produto.belongsTo(models.Estoque, {
+            as: "estoque",
+            foreignKey: "estoque_id_estoque"
+        })
+    }
     return Produto;
 }
