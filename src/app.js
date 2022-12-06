@@ -1,10 +1,10 @@
 const express = require('express');
 const path = require('path');
-const produtoController = require('./src/controllers/produtoController');
+const produtoController = require('./controllers/produtoController');
 
 const app = express();
-const produtoRouter = require('./src/routes/produtoRoutes');
-const estoqueRouter = require('./src/routes/estoqueRoutes');
+const produtoRouter = require('./routes/produtoRoutes');
+const estoqueRouter = require('./routes/estoqueRoutes');
 
 app.use(express.json());
 app.use('/produto', produtoRouter);
