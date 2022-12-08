@@ -3,13 +3,17 @@ const Estoque = db.Estoque;
 
 const estoqueController = {
     list: (req, res) => {
-        Estoque.findAll()
-        .then(estoques => {
-            res.status(200).json(estoques)
+        Estoque.findAll({
+            include: [
+                { model: db.Produto, as: "produto" }
+            ]
         })
-        .catch(err => {
-            res.status(500).json(err);
-        })
+            .then(estoques => {
+                res.status(200).json(estoques)
+            })
+            .catch(err => {
+                res.status(500).json(err);
+            })
     }
 }
 

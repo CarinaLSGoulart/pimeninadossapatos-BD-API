@@ -22,11 +22,11 @@ module.exports = (sequelize, DataTypes) => {
 
         Estoque.associate = function(models) {
             Estoque.belongsToMany(models.Produto, {
-                as: "Produto",
+                as: "produto",
                 through: "produto_has_estoque",
-                foreignKey: "estoque_id_estoque",
-                otherKey: "produto_id_produto",
-                timestamps: false,
+                foreignKey: "produto_id_produto",
+                otherKey:"estoque_id_estoque",
+                timestamps: false
             })
         }
         
