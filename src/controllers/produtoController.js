@@ -5,7 +5,7 @@ const produtoController = {
     list: (req, res) => {
         Produto.findAll({
             include: [
-                { model: db.Produto, as: "produto" }
+                { model: db.Estoque, as: "estoque" }
             ]
         })
             .then(produtos => {
@@ -13,6 +13,7 @@ const produtoController = {
             })
             .catch(err => {
                 res.status(500).json(err); // 500 - Internal error
+                console.log(err)
             })
     },
     detail: (req, res) => {
@@ -27,7 +28,40 @@ const produtoController = {
             .catch(err => {
                 res.status(404).json(err)
             })
-    }
+    },
+    create: async (req, res) => {
+        const produto = req.body
+        try {
+          await Produto.create(produto)
+          res.status(201).json({ msg: 'Produto criado com sucesso!' })
+        } catch (err) {
+          res.status(400).json({ error: [err] })
+          console.log(err)
+        }
+      },
+  
+      update: async (req, res) => {
+        const idProduto = req.params.id
+        const produto = req.body
+        try {
+          await Produto.update(produto, { where: { idProduto } })
+          res.status(201).json({ msg: 'Produto alterado com sucesso!' })
+        } catch (err) {
+          res.status(400).json({ error: [err] })
+          console.log(err)
+        }
+      },
+  
+      delete: async (req, res) => {
+        const idProduto = req.params.id
+        try {
+          await Produto.destroy({ where: { idProduto } })
+          res.status(200).json({ msg: 'Produto excluído com sucesso!' })
+        } catch (err) {
+          res.status(400).json({ error: [err] }),
+          console.log(err)
+        }
+      }
 }
 
 module.exports = produtoController;
