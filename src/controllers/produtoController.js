@@ -17,7 +17,7 @@ const produtoController = {
             })
     },
     detail: (req, res) => {
-        Produto.findByPk(req.params.id)
+        Produto.findByPk(req.params.idProduto)
             .then(produto => {
                 if (!produto) {
                     res.status(404).json(produto) //404 - Not found
@@ -35,30 +35,30 @@ const produtoController = {
           await Produto.create(produto)
           res.status(201).json({ msg: 'Produto criado com sucesso!' })
         } catch (err) {
-          res.status(400).json({ error: [err] })
+          res.status(400).json({ error: [...err] })
           console.log(err)
         }
       },
   
       update: async (req, res) => {
-        const idProduto = req.params.id
+        const idProduto = req.params.idProduto
         const produto = req.body
         try {
           await Produto.update(produto, { where: { idProduto } })
           res.status(201).json({ msg: 'Produto alterado com sucesso!' })
         } catch (err) {
-          res.status(400).json({ error: [err] })
+          res.status(304).json({ error: [...err] }) //304 = Not Modified
           console.log(err)
         }
       },
   
       delete: async (req, res) => {
-        const idProduto = req.params.id
+        const idProduto = req.params.idProduto
         try {
           await Produto.destroy({ where: { idProduto } })
           res.status(200).json({ msg: 'Produto excluído com sucesso!' })
         } catch (err) {
-          res.status(400).json({ error: [err] }),
+          res.status(400).json({ error: [...err] }),
           console.log(err)
         }
       }
