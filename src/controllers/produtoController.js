@@ -40,28 +40,27 @@ const produtoController = {
         }
       },
   
-      update: async (req, res) => {
-        const idProduto = req.params.id
-        const produto = req.body
-        try {
-          await Produto.update(produto, { where: { idProduto } })
-          res.status(201).json({ msg: 'Produto alterado com sucesso!' })
-        } catch (err) {
-          res.status(400).json({ error: [err] })
-          console.log(err)
-        }
-      },
-  
-      delete: async (req, res) => {
-        const idProduto = req.params.id
-        try {
-          await Produto.destroy({ where: { idProduto } })
-          res.status(200).json({ msg: 'Produto excluído com sucesso!' })
-        } catch (err) {
-          res.status(400).json({ error: [err] }),
-          console.log(err)
-        }
+    update: async (req, res) => {
+      const idProduto = req.params.id
+      const produto = req.body
+      try {
+        await Produto.update(produto, { where: { idProduto } })
+        res.status(201).json({ msg: 'Produto alterado com sucesso!' })
+      } catch (err) {
+        res.status(400).json({ error: [err] })
+        console.log(err)
       }
+    },
+    delete: async (req, res) => {
+      const idProduto = req.params.id
+      try {
+        await Produto.destroy({ where: { idProduto } })
+        res.status(200).json({ msg: 'Produto excluído com sucesso!' })
+      } catch (err) {
+        res.status(400).json({ error: [err] }),
+        console.log(err)
+      }
+    }
 }
 
 module.exports = produtoController;
