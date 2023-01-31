@@ -1,4 +1,5 @@
 const { sequelize, DataTypes, INTEGER } = require('sequelize');
+const perfilController = require('../../controllers/perfilController');
 
 module.exports = (sequelize, DataTypes) => {
     const Perfil = sequelize.define(
@@ -28,6 +29,13 @@ module.exports = (sequelize, DataTypes) => {
                 foreignKey: "endereco_id_endereco",
                 otherKey:"perfil_id_perfil",
                 timestamps: false
+            })
+        }
+
+        Perfil.associate = function(models) {
+            Perfil.belongsTo(models.Login, {
+                as: "perfil",
+                foreignKey: "id_perfil"
             })
         }
 

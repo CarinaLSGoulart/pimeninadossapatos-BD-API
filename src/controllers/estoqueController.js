@@ -2,7 +2,7 @@ const db = require('../database/models');
 const Estoque = db.Estoque;
 
 const estoqueController = {
-  list: (req, res) => {
+  listar: (req, res) => {
     Estoque.findAll({
       include: [
         { model: db.Produto, as: "produto" }
@@ -16,7 +16,8 @@ const estoqueController = {
         console.log(err)
       })
   },
-  detail: (req, res) => {
+
+  detalhar: (req, res) => {
     Estoque.findByPk(req.params.id)
       .then(estoque => {
         if (!estoque) {
@@ -30,22 +31,22 @@ const estoqueController = {
       })
   },
 
-  create: (req, res) => {
+  criar: (req, res) => {
     Estoque.create({
       numeracao: req.body.numeracao,
       quantidade: req.body.quantidade,
       codigoSku: req.body.codigoSku
     })
-    .then(estoqueCriado => {
-      res.json({ message: 'Estoque criado com sucesso', data: estoqueCriado });
-    })
-    .catch(error => {
-      console.log(error);
-      res.status(500).json({ message: 'Erro ao criar estoque', error });
-    });
+      .then(estoqueCriado => {
+        res.json({ message: 'Estoque criado com sucesso', data: estoqueCriado });
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(500).json({ message: 'Erro ao criar estoque', error });
+      });
   },
 
-  update: async (req, res) => {
+  atualizar: async (req, res) => {
     const idEstoque = req.params.id
     const estoque = req.body
     try {
@@ -58,7 +59,7 @@ const estoqueController = {
     }
   },
 
-  delete: async (req, res) => {
+  deletar: async (req, res) => {
     const idEstoque = req.params.id
     try {
       await Estoque.destroy({ where: { idEstoque } })
