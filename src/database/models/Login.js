@@ -20,5 +20,12 @@ module.exports = (sequelize, DataTypes) => {
         }
 
     )
+
+    Login.associate = function(models) {
+        Login.belongsTo(models.Perfil, {
+            as: "login",
+            foreignKey: "id_login"
+        })
+    }
     return Login;
     }

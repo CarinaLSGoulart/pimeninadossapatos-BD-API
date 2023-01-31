@@ -3,10 +3,10 @@ const router = express.Router();
 
 const loginController = require('../controllers/loginController')
 
-router.get('/', loginController.list);
-router.post('/', loginController.create)
-router.put('/:id', loginController.update)
-router.delete('/:id', loginController.delete)
+router.get('/', loginController.listar);
+router.post('/', loginController.criar)
+router.put('/:id', loginController.atualizar)
+router.delete('/:id', loginController.deletar)
 
 
 module.exports = router;

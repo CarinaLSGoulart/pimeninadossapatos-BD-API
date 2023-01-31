@@ -1,8 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const perfilController = require('../controllers/perfilController');
+const perfilController = require('../controllers/perfilController')
 
-router.get('/perfil/:id', perfilController.detail);
+router.get('/', perfilController.detalhar);
+router.post('/', perfilController.criar)
+router.put('/:id', perfilController.atualizar)
+router.delete('/:id', perfilController.deletar)
+
 
 module.exports = router;
