@@ -10,9 +10,9 @@ module.exports = (sequelize, DataTypes) => {
                 notNull: true,
                 autoIncrement: true,
             },
-            enderecoEntrega: DataTypes.STRING,
-            opcaoEntrega: DataTypes.STRING,
-            formaPagamento: DataTypes.STRING,
+            codigoSku: DataTypes.STRING,
+            quantidade: DataTypes.STRING,
+            numero: DataTypes.STRING,
         },
         {
             tableName: 'pedido',
