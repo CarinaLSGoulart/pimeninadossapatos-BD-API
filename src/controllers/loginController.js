@@ -10,9 +10,9 @@ const LoginController = {
                 ]
             });
             res.render('login', { logins });
-        } catch (err) {
-            res.status(400).json({ error: [...err] }),
-                console.log(err)
+        } catch (error) {
+            res.status(400).json({ error: [...error] }),
+                console.log(error)
         }
     },
 
@@ -21,9 +21,9 @@ const LoginController = {
             const { email, senha } = req.body;
             const novoLogin = await Login.create({ email, senha });
             res.redirect('/login/cadastro');
-        } catch (err) {
-            res.status(400).json({ error: [...err] }),
-                console.log(err)
+        } catch (error) {
+            res.status(400).json({ error: [...error] }),
+                console.log(error)
         }
     },
 
@@ -32,9 +32,9 @@ const LoginController = {
             const { idLogin, email, senha } = req.body;
             const loginAtualizado = await Login.update({ email, senha }, { where: { idLogin } });
             res.redirect('/login');
-        } catch (err) {
-            res.status(400).json({ error: [...err] }),
-                console.log(err)
+        } catch (error) {
+            res.status(400).json({ erroror: [...error] }),
+                console.log(error)
         }
     },
 
@@ -43,9 +43,9 @@ const LoginController = {
             const { idLogin } = req.params;
             await Login.destroy({ where: { idLogin } });
             res.redirect('/login');
-        } catch (err) {
-            res.status(400).json({ error: [...err] }),
-                console.log(err)
+        } catch (error) {
+            res.status(400).json({ erroror: [...error] }),
+                console.log(error)
         }
     }
 }
