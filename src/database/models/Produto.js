@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
             },
             codigoSku: DataTypes.INTEGER,
             genero: DataTypes.STRING,
+            nome: DataTypes.STRING,
             descricao: DataTypes.STRING,
             preco: DataTypes.INTEGER,
             cor: DataTypes.STRING,
