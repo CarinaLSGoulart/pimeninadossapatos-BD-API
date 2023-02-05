@@ -12,8 +12,9 @@ const produtoController = {
         res.status(200).json(produtos)
       })
       .catch(err => {
-        res.status(500).json(err); // 500 - Internal error
         console.log(err)
+        res.status(500).json(err); // 500 - Internal error
+        //console.log(err)
       })
   },
 
