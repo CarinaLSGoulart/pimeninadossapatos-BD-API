@@ -7,12 +7,14 @@ const produtoRouter = require('./routes/produtoRoutes');
 const estoqueRouter = require('./routes/estoqueRoutes');
 const enderecoRouter = require('./routes/enderecoRoutes')
 const loginRouter = require('./routes/loginRoutes')
+const perfilRouter = require('./routes/perfilRoutes')
 
 app.use(express.json());
 app.use('/produto', produtoRouter);
 app.use('/estoque', estoqueRouter);
 app.use('/enderecoDeEntrega', enderecoRouter);
-app.use('/login', loginRouter)
+app.use('/login', loginRouter);
+app.use('/perfil', perfilRouter);
 
 app.use(function (err, req, res, next){
 

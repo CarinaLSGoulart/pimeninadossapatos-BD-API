@@ -1,5 +1,4 @@
 const { sequelize, DataTypes, INTEGER } = require('sequelize');
-const perfilController = require('../../controllers/perfilController');
 
 module.exports = (sequelize, DataTypes) => {
     const Perfil = sequelize.define(
