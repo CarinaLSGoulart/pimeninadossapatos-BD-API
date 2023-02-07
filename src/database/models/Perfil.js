@@ -7,7 +7,6 @@ module.exports = (sequelize, DataTypes) => {
             idPerfil: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
-                notNull: true,
                 autoIncrement: true,
             },
             nome: DataTypes.STRING,
@@ -23,20 +22,18 @@ module.exports = (sequelize, DataTypes) => {
 
         Perfil.associate = function(models) {
             Perfil.belongsToMany(models.Endereco, {
-                as: "perfil",
+                as: "perfil_endereco",
                 through: "endereco_has_perfil",
                 foreignKey: "endereco_id_endereco",
                 otherKey:"perfil_id_perfil",
                 timestamps: false
-            })
-        }
-
-        Perfil.associate = function(models) {
+            });
             Perfil.belongsTo(models.Login, {
-                as: "perfil",
+                as: "perfil_login",
                 foreignKey: "id_perfil"
-            })
-        }
+            });
+        };
+        
 
     return Perfil;
 }
