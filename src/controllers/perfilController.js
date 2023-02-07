@@ -4,7 +4,11 @@ const Perfil = db.Perfil;
 
 const perfilController = {
     listar: (req, res) => {
-    Perfil.findAll()
+    Perfil.findAll({
+      include: [
+          { model: db.Login, as: "perfil_login" }
+      ]
+  })
       .then(perfil => {
         res.status(200).json(perfil)
       })

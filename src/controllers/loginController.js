@@ -2,52 +2,91 @@ const db = require('../database/models');
 const Login = db.Login;
 
 const LoginController = {
-    listar: async (req, res) => {
-        try {
-            const logins = await Login.findAll({
-                include: [
-                    { model: db.Perfil, as: "perfil" }
-                ]
+    listar: (req, res) => {
+        Login.findAll({
+            include: [
+                { model: db.Perfil, as: "perfil_login" }
+            ]
+        })
+            .then(login => {
+                res.status(200).json(login)
+            })
+            .catch(err => {
+                console.error(err)
+                res.status(500).json({ error: 'Ocorreu um erro interno ao buscar logins' });
+            })
+    },
+
+    detalhar: (req, res) => {
+        Login.findByPk(req.params.idLogin)
+            .then(login => {
+                if (!login) {
+                    res.status(404).json({ error: 'Login não encontrado' })
+                } else {
+                    res.status(200).json(login)
+                }
+            })
+            .catch(err => {
+                console.error(err)
+                res.status(500).json({ error: 'Ocorreu um erro interno ao buscar login' });
+            })
+    },
+
+    logar: (req, res) => {
+        Login.findOne({
+            where: {
+                email: req.body.email,
+                senha: req.body.password
+            }
+        })
+            .then(login => {
+                if (!login) {
+                    res.status(401).json({ error: 'E-mail ou senha inválidos' });
+                } else {
+                    res.status(200).json({ success: true, login });
+                }
+            })
+            .catch(error => {
+                console.error(error)
+                res.status(500).json({ error: 'Ocorreu um erro interno ao logar!' })
+            })
+    },
+
+    criar: (req, res) => {
+        Login.create(req.body).then(login => {
+            res.status(201).json(login)
+        })
+            .catch(error => {
+                console.error(error)
+                res.status(500).json({ error: 'Ocorreu um erro interno ao criar login' });
+            })
+    },
+
+    atualizar: (req, res) => {
+        Login.update({
+            email: req.body.email,
+            senha: req.body.password
+        }, {
+            where: { id: req.params.id }
+        })
+            .then(() => res.status(200).json({ success: true }))
+            .catch(error => {
+                console.error(error)
+                res.status(400).json({ error: 'Ocorreu um erro ao atualizar login' });
             });
-            res.render('login', { logins });
-        } catch (error) {
-            res.status(400).json({ error: [...error] }),
-                console.log(error)
-        }
     },
 
-    criar: async (req, res) => {
-        try {
-            const { email, senha } = req.body;
-            const novoLogin = await Login.create({ email, senha });
-            res.redirect('/login/cadastro');
-        } catch (error) {
-            res.status(400).json({ error: [...error] }),
-                console.log(error)
-        }
-    },
-
-    atualizar: async (req, res) => {
-        try {
-            const { idLogin, email, senha } = req.body;
-            const loginAtualizado = await Login.update({ email, senha }, { where: { idLogin } });
-            res.redirect('/login');
-        } catch (error) {
-            res.status(400).json({ erroror: [...error] }),
-                console.log(error)
-        }
-    },
-
-    deletar: async (req, res) => {
-        try {
-            const { idLogin } = req.params;
-            await Login.destroy({ where: { idLogin } });
-            res.redirect('/login');
-        } catch (error) {
-            res.status(400).json({ erroror: [...error] }),
-                console.log(error)
-        }
+    deletar: (req, res) => {
+        Login.destroy({
+            where: { id: req.params.id }
+        })
+            .then(() => res.status(200).json({ success: true }))
+            .catch(error => {
+                console.error(error)
+                res.status(400).json({ error: 'Ocorreu um erro ao deletar login' });
+            });
     }
 }
+
 
 module.exports = LoginController;

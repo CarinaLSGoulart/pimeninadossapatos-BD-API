@@ -7,7 +7,6 @@ module.exports = (sequelize, DataTypes) => {
             idLogin: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
-                notNull: true,
                 autoIncrement: true,
             },
             email: DataTypes.STRING,
@@ -23,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Login.associate = function(models) {
         Login.belongsTo(models.Perfil, {
-            as: "login",
+            as: "perfil_login",
             foreignKey: "id_login"
         })
     }
