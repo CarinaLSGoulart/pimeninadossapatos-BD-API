@@ -3,7 +3,8 @@ const router = express.Router();
 
 const perfilController = require('../controllers/perfilController')
 
-router.get('/', perfilController.detalhar);
+router.get('/', perfilController.listar);
+router.get('/:id', perfilController.detalhar);
 router.post('/', perfilController.criar)
 router.put('/:id', perfilController.atualizar)
 router.delete('/:id', perfilController.deletar)

@@ -3,28 +3,38 @@ const Perfil = db.Perfil;
 
 
 const perfilController = {
-    detalhar: async (req, res) => {
-        try {
-            const user = await Perfil.findByPk(req.params.id);
-            if (!user) {
-                return res.status(404).json({ success: false, error: 'Usuário não encontrado' });
+    listar: (req, res) => {
+    Perfil.findAll()
+      .then(perfil => {
+        res.status(200).json(perfil)
+      })
+      .catch(err => {
+        console.log(err)
+        res.status(500).json(err); // 500 - Internal error
+        //console.log(err)
+      })
+  },
+    detalhar: (req, res) => {
+        Perfil.findByPk(req.params.idPerfil)
+          .then(perfil => {
+            if (!perfil) {
+              res.status(404).json(perfil) //404 - Not found
+            } else {
+              res.status(200).json(perfil)
             }
-            return res.render('user', { user });
-        } catch (error) {
-            console.error(error);
-            return res.status(500).json({ success: false, error: 'Erro ao buscar usuário' });
-        }
-    },
+          })
+          .catch(err => {
+            res.status(404).json(err)
+          })
+      },
 
-    criar: async (req, res) => {
-        try {
-            const { nome, sobrenome, email, senha } = req.params;
-            await Perfil.create({ nome, sobrenome, email, senha });
-            return res.json({ success: true });
-        } catch (error) {
-            console.error(error);
-            return res.status(500).json({ success: false, error: 'Erro ao criar usuário' });
-        }
+    criar: (req, res) => {
+        Perfil.create(req.body).then(perfil => {
+            res.stauts(200).json(perfil)
+        })
+        .catch(error => {
+            res.status(500).json(error)
+        })
     },
 
     atualizar: (req, res) => {

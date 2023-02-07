@@ -1,0 +1,10 @@
+INSERT INTO endereco (cep, rua, bairro, cidade, estado) values ("46117876", "Rua Bom Jesus da Lapa", "Esconso", "Brumado", "Bahia");
+INSERT INTO endereco (cep, rua, bairro, cidade, estado) values ("42722220", "Rua Bom Jesus da Lapa", "Caji", "Lauro de Freitas", "Bahia");
+INSERT INTO endereco (cep, rua, bairro, cidade, estado) values ("86811260", "Rua Bom Jesus da Lapa", "Jardim Independência", "Apucarana", "Paraná");
+INSERT INTO endereco (cep, rua, bairro, cidade, estado) values ("23085700", "Rua Bom Jesus da Lapa", "Campo Grande","Rio de Janeiro","Rio de Janeiro");
+INSERT INTO endereco (cep, rua, bairro, cidade, estado) values ("28890159", "Travessa Goiás II", "Cidade Beira Mar", "Rio das Ostras", "Rio de Janeiro");
+INSERT INTO endereco (cep, rua, bairro, cidade, estado) values ("29941570", "Avenida Goiás", "Santo Antônio", "Sao Mateus", "Espirito Santo");
+INSERT INTO endereco (cep, rua, bairro, cidade, estado) values ("71060041", "QE 26 Conjunto D", "Guará II", "Brasilia", "DF");
+INSERT INTO endereco (cep, rua, bairro, cidade, estado) values ("72874136", "Rua 29 QD 34", "Parque Esplanada V", "Valparaíso de Goiás", "Goiás");
+INSERT INTO endereco (cep, rua, bairro, cidade, estado) values ("76380049", "Rua 29", "Centro", "Goianésia", "Goiás");
+INSERT INTO endereco (cep, rua, bairro, cidade, estado) values ("78032090", "Avenida Senador Filinto Müller", "Goiabeira", "Cuiabá", "Mato Grosso");

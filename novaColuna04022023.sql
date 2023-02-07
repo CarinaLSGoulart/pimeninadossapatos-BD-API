@@ -1,6 +1,6 @@
 SELECT * FROM pi_meninadossapatos.produto;
 
-ALTER TABLE produto CHANGE descricao nome VARCHAR(30);
+ALTER TABLE produto CHANGE descricao nome VARCHAR(45);
 alter table produto add column descricao varchar(200) after nome;
 
 
